@@ -18,8 +18,10 @@ echo "Error Occurred.."
 fi
 
 set -e
-
+echo 'Echoing $@'
+echo "$@"
 if [ "${1:0:1}" = '-' ]; then
+	echo 'Setting --'
 	set -- mongod "$@"
 fi
 
