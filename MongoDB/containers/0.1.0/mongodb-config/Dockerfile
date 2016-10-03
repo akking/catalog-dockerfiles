@@ -1,5 +1,5 @@
 FROM alpine:3.1
-MAINTAINER Hussein Galal
+MAINTAINER Jeff Kolb
 
 ADD ./*.sh /opt/rancher/bin/
 RUN chmod u+x /opt/rancher/bin/*.sh
