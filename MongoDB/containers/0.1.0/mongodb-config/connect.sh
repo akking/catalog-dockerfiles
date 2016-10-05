@@ -32,14 +32,6 @@ function cluster_init {
 			mongo --eval "printjson(rs.add('$MONGOHOSTNAME'))" --quiet
 		fi
 	done
-	#for member in ${MISSINGSERVERS[@]}; do
-	#	if [ $member != $MYIP ]
-	#	then
-	#		echo "$HN is not present in the replica set - adding it now"
-	#		mongo --eval "rs.add('$HN')"
-	#		sleep 5
-	#	fi
-	#done
 }
 
 function find_master {
