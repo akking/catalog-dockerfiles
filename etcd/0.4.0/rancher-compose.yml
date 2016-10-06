@@ -1,3 +1,0 @@
-etcd:
-  retain_ip: true
-  scale: ${REPLICAS}

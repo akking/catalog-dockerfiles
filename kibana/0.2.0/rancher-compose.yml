@@ -1,6 +1,0 @@
-nginx-proxy:
-  metadata:
-    nginx:
-      conf:
-        servername: "kibana"
-        upstream_port: 5601 
