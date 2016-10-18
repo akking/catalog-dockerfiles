@@ -17,5 +17,5 @@ RUN apk add --no-cache wget \
 	&& unzip  -d / ./target/universal/kafka-manager-${KM_VERSION}.zip \
 	&& cp /kafka-manager-${KM_VERSION}/bin/kafka-manager /bin \
 	&& cd / \
-	&& rm -ef /tmp
+	&& rm -rf /tmp
 
