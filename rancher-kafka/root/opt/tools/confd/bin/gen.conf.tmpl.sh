@@ -49,6 +49,8 @@ broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
 jmx.opts=${KAFKA_JMX_OPTS}
 listeners=${KAFKA_LISTENER}
+kaip=${KAFKA_ADVERTISE_IP}
+rmiip=${RMI_SERVER_IP}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
 num.io.threads=8
