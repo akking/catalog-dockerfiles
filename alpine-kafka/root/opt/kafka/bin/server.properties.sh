@@ -17,23 +17,11 @@ else
 	KAFKA_ADVERTISE_LISTENER=${KAFKA_ADVERTISE_LISTENER:-"PLAINTEXT://"${KAFKA_EXT_IP}":"${KAFKA_ADVERTISE_PORT}}
 fi
 
-#TO DO - set the port via var if the JMX_HOSTNAME is set
-if [ $ENABLE_JMX ]; then
-    KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true"
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false"
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=9000 "
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_EXT_IP} "
-    export KAFKA_JMX_OPTS
-fi
-
-
 cat << EOF > ${SERVICE_CONF}
 ############################# Server Basics #############################
 broker.id=0
 ############################# Socket Server Settings #############################
 listeners=${KAFKA_LISTENER}
-jmx.opts=${KAFKA_JMX_OPTS}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
 num.io.threads=8

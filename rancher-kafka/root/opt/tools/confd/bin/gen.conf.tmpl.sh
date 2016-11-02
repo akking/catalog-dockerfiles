@@ -19,6 +19,16 @@ fi
 KAFKA_ADVERTISE_LISTENER=${KAFKA_ADVERTISE_LISTENER:-"PLAINTEXT://"${KAFKA_ADVERTISE_IP}":"${KAFKA_ADVERTISE_PORT}}
 RMI_SERVER_IP=${KAFKA_ADVERTISE_IP}
 
+#TO DO - set the port via var if the JMX_HOSTNAME is set
+if [ $ENABLE_JMX ]; then
+    KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMXPORT%:*} "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_ADVERTISE_IP} "
+    export KAFKA_JMX_OPTS
+fi
+
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/server.properties.toml
 [template]
 src = "server.properties.tmpl"
@@ -37,6 +47,7 @@ cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/server.properties.tmpl
 ############################# Server Basics #############################
 broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
+jmx.opts=${KAFKA_JMX_OPTS}
 listeners=${KAFKA_LISTENER}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
