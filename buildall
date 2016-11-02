@@ -1,0 +1,2 @@
+find . -name build | xargs -n1 sh
+
