@@ -5,14 +5,14 @@ MAINTAINER Jeff Kolb <jeff.kolb@intlfcstone.com>
 ENV SERVICE_HOME=/opt/kafka \
     SERVICE_NAME=kafka \
     SCALA_VERSION=2.11 \
-    SERVICE_VERSION=0.10.0.1 \
+    SERVICE_VERSION=0.10.1.0 \
     SERVICE_USER=kafka \
     SERVICE_UID=10003 \
     SERVICE_GROUP=kafka \
     SERVICE_GID=10003 \
     SERVICE_VOLUME=/opt/tools \
     SERVICE_URL=http://apache.mirrors.spacedump.net/kafka 
-ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
+	ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
     SERVICE_CONF=${SERVICE_HOME}/config/server.properties 
 
 # Install and configure kafka
@@ -31,4 +31,4 @@ RUN chmod +x ${SERVICE_HOME}/bin/*.sh \
 USER $SERVICE_USER
 WORKDIR $SERVICE_HOME
 
-EXPOSE 9092
+EXPOSE 9092 ${JMX_PORT}
