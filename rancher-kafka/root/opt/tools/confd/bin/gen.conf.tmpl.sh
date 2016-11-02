@@ -17,17 +17,17 @@ else
     KAFKA_ADVERTISE_IP='{{getv "/self/container/primary_ip"}}'
 fi
 KAFKA_ADVERTISE_LISTENER=${KAFKA_ADVERTISE_LISTENER:-"PLAINTEXT://"${KAFKA_ADVERTISE_IP}":"${KAFKA_ADVERTISE_PORT}}
-RMI_SERVER_IP=${KAFKA_ADVERTISE_IP}
+#RMI_SERVER_IP=${KAFKA_ADVERTISE_IP}
+echo $KAFKA_ADVERTISE_IP
 
-#TO DO - set the port via var if the JMX_HOSTNAME is set
 if [ $ENABLE_JMX ]; then
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMXPORT%:*} "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_ADVERTISE_IP} "
-    export KAFKA_JMX_OPTS
 fi
+
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/server.properties.toml
 [template]
@@ -47,10 +47,9 @@ cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/server.properties.tmpl
 ############################# Server Basics #############################
 broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
+rmi.ip=${KAFKA_ADVERTISE_IP}
 jmx.opts=${KAFKA_JMX_OPTS}
 listeners=${KAFKA_LISTENER}
-kaip=${KAFKA_ADVERTISE_IP}
-rmiip=${RMI_SERVER_IP}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
 num.io.threads=8
@@ -71,7 +70,7 @@ log.retention.hours=${KAFKA_LOG_RETENTION_HOURS}
 log.segment.bytes=1073741824
 log.retention.check.interval.ms=300000
 log.cleaner.enable=true
-############################# Connect Policy #############################{{ \$zk_link := split (getenv "ZK_SERVICE") "/" }}{{\$zk_stack := index \$zk_link 0}}{{ \$zk_service := index \$zk_link 1}} 
+############################# Connect Policy #############################{{ \$zk_link := split (getenv "ZK_SERVICE") "/" }}{{\$zk_stack := index \$zk_link 0}}{{ \$zk_service := index \$zk_link 1}}
 zookeeper.connect={{range \$i, \$e := ls (printf "/stacks/%s/services/%s/containers" \$zk_stack \$zk_service)}}{{if \$i}},{{end}}{{getv (printf "/stacks/%s/services/%s/containers/%s/primary_ip" \$zk_stack \$zk_service \$e)}}:${KAFKA_ZK_PORT}{{end}}
 zookeeper.connection.timeout.ms=6000
 EOF
