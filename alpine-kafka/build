@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 BASEDIR=$(dirname $(readlink -f $0))
-VERSION=$(cat $BASEDIR/version)
+VERSION=$(cat "$BASEDIR/version")
 echo "Building $BASEDIR with tag $VERSION"
 docker build -t jeffkolb/alpine-kafka:$VERSION $BASEDIR
