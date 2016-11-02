@@ -1,1 +1,1 @@
-docker build -t jeffkolb/rancher-kafka:$(cat version) .a
+docker build -t jeffkolb/rancher-kafka:$(cat version) .
