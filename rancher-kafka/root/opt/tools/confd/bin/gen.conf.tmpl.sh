@@ -42,13 +42,15 @@ keys = [
 
 reload_cmd = "${SERVICE_HOME}/bin/kafka-service.sh restart"
 EOF
-
+#jmx.opts=${KAFKA_JMX_OPTS}
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/server.properties.tmpl
 ############################# Server Basics #############################
 broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
-rmi.ip=${KAFKA_ADVERTISE_IP}
-jmx.opts=${KAFKA_JMX_OPTS}
+java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
+com.sun.management.jmxremote.local.only=false
+com.sun.management.jmxremote.rmi.port=$JMX_PORT
+com.sun.management.jmxremote.port=$JMX_PORT
 listeners=${KAFKA_LISTENER}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
