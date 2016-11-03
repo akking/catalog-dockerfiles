@@ -24,7 +24,7 @@ if [ $ENABLE_JMX ]; then
     KAFKA_JMX_OPTS="-Dcom.sun.management.jmxremote=true "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false "
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMX_PORT%:*} "
+    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMXPORT%:*} "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_ADVERTISE_IP} "
 fi
 
@@ -50,8 +50,8 @@ broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
 java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
-com.sun.management.jmxremote.rmi.port=${JMX_PORT%:*}
-com.sun.management.jmxremote.port=${JMX_PORT%:*}
+com.sun.management.jmxremote.rmi.port=${JMXPORT%:*}
+com.sun.management.jmxremote.port=${JMXPORT%:*}
 listeners=${KAFKA_LISTENER}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
