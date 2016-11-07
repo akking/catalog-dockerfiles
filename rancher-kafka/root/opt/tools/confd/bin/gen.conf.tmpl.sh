@@ -81,7 +81,7 @@ EOF
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/server.hostname.toml
 [template]
 src = "server.hostname.tmpl"
-dest = "${SERVICE_HOME}/config/server.hostname"
+dest = "${SERVICE_HOME}/config/serverhostname"
 owner = "${SERVICE_USER}"
 mode = "0644"
 keys = [
