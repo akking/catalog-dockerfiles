@@ -27,7 +27,7 @@ if [ $ENABLE_JMX ]; then
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMXPORT%:*} "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_ADVERTISE_IP} "
 fi
-RMIPORT=${JMXPORT%:*}
+
 echo $KAFKA_JMX_OPTS
 
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/server.properties.toml
@@ -50,8 +50,8 @@ broker.id={{getv "/self/container/service_index"}}
 ############################# Socket Server Settings #############################
 java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
-com.sun.management.jmxremote.rmi.port=${RMIPORT}
-com.sun.management.jmxremote.port=${RMIPORT}
+com.sun.management.jmxremote.rmi.port=${JMXPORT%:*}
+com.sun.management.jmxremote.port=${JMXPORT%:*}
 JMXO=${KAFKA_JMX_OPTS}
 listeners=${KAFKA_LISTENER}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
@@ -78,4 +78,3 @@ log.cleaner.enable=true
 zookeeper.connect={{range \$i, \$e := ls (printf "/stacks/%s/services/%s/containers" \$zk_stack \$zk_service)}}{{if \$i}},{{end}}{{getv (printf "/stacks/%s/services/%s/containers/%s/primary_ip" \$zk_stack \$zk_service \$e)}}:${KAFKA_ZK_PORT}{{end}}
 zookeeper.connection.timeout.ms=6000
 EOF
-

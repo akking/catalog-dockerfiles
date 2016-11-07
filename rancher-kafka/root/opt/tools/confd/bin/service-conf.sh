@@ -59,7 +59,7 @@ CONF_PARAMS=${CONF_PARAMS:-"-confdir /opt/tools/confd/etc -backend ${CONF_BACKEN
 CONF_ONETIME="${CONF_BIN} -onetime ${CONF_PARAMS}"
 CONF_INTERVAL="${CONF_BIN} -interval ${CONF_INTERVAL} ${CONF_PARAMS}"
 ADVERTISE_PUB_IP=${ADVERTISE_PUB_IP:-"false"}
-env > /root/kafka/theenv
+
 case "$1" in
         "start")
             serviceStart >> ${CONF_LOG} 2>&1
