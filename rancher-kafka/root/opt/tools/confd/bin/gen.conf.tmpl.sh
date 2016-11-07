@@ -94,12 +94,10 @@ reload_cmd = "${SERVICE_HOME}/bin/kafka-service.sh restart"
 EOF
 #jmx.opts=${KAFKA_JMX_OPTS}
 cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/serverhostname.tmpl
-############################# Server Basics #############################
-broker.id={{getv "/self/container/service_index"}}
-############################# Socket Server Settings #############################
+############################# RMI Server Basics #############################
 java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
 com.sun.management.jmxremote.rmi.port=${JMXPORT%:*}
 com.sun.management.jmxremote.port=${JMXPORT%:*}
-JMXO=" ${KAFKA_JMX_OPTS}"
+JMXO= ${KAFKA_JMX_OPTS}
 EOF
