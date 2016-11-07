@@ -78,7 +78,7 @@ zookeeper.connect={{range \$i, \$e := ls (printf "/stacks/%s/services/%s/contain
 zookeeper.connection.timeout.ms=6000
 EOF
 
-cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/server.hostname.toml
+cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/serverhostname.toml
 [template]
 src = "server.hostname.tmpl"
 dest = "${SERVICE_HOME}/config/serverhostname"
@@ -92,7 +92,7 @@ keys = [
 reload_cmd = "${SERVICE_HOME}/bin/kafka-service.sh restart"
 EOF
 
-cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/server.hostname.tmpl
+cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/serverhostname.tmpl
 java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
 com.sun.management.jmxremote.rmi.port=${RMIPORT}
