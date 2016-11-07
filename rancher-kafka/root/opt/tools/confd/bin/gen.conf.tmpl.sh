@@ -52,6 +52,7 @@ java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
 com.sun.management.jmxremote.rmi.port=${RMIPORT}
 com.sun.management.jmxremote.port=${RMIPORT}
+JMXO=${KAFKA_JMX_OPTS}
 listeners=${KAFKA_LISTENER}
 advertised.listeners=${KAFKA_ADVERTISE_LISTENER}
 num.network.threads=3
@@ -78,24 +79,3 @@ zookeeper.connect={{range \$i, \$e := ls (printf "/stacks/%s/services/%s/contain
 zookeeper.connection.timeout.ms=6000
 EOF
 
-cat << EOF > ${SERVICE_VOLUME}/confd/etc/conf.d/serverhostname.toml
-[template]
-src = "server.hostname.tmpl"
-dest = "${SERVICE_HOME}/config/serverhostname"
-owner = "${SERVICE_USER}"
-mode = "0644"
-keys = [
-  "/self",
-  "/stacks",
-]
-
-reload_cmd = "${SERVICE_HOME}/bin/kafka-service.sh restart"
-EOF
-
-cat << EOF > ${SERVICE_VOLUME}/confd/etc/templates/serverhostname.tmpl
-java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
-com.sun.management.jmxremote.local.only=false
-com.sun.management.jmxremote.rmi.port=${RMIPORT}
-com.sun.management.jmxremote.port=${RMIPORT}
-${KAFKA_JMX_OPTS}
-EOF
