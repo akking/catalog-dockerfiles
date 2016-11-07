@@ -97,5 +97,5 @@ java.rmi.server.hostname=${KAFKA_ADVERTISE_IP}
 com.sun.management.jmxremote.local.only=false
 com.sun.management.jmxremote.rmi.port=${RMIPORT}
 com.sun.management.jmxremote.port=${RMIPORT}
-
+${KAFKA_JMX_OPTS}
 EOF
