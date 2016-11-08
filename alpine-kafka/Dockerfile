@@ -15,8 +15,8 @@ ENV SERVICE_HOME=/opt/kafka \
 ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
     SERVICE_CONF=${SERVICE_HOME}/config/server.properties 
 
-RUN JMXP=${JMXPORT%:*}
-ENV JMX_PORT=$JMXP
+ENV JMXP=${JMXPORT%:*}
+#ENV JMX_PORT=$JMXP
 	
 # Install and configure kafka
 RUN curl -sS -k ${SERVICE_URL}/${SERVICE_VERSION}/${SERVICE_RELEASE}.tgz | gunzip -c - | tar -xf - -C /opt \
