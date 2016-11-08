@@ -13,9 +13,8 @@ ENV SERVICE_HOME=/opt/kafka \
     SERVICE_VOLUME=/opt/tools \
     SERVICE_URL=http://apache.mirrors.spacedump.net/kafka 
 ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
-    SERVICE_CONF=${SERVICE_HOME}/config/server.properties 
-#ENV JMXP=${JMXPORT%:*}
-#ENV JMX_PORT=$JMXP
+    SERVICE_CONF=${SERVICE_HOME}/config/server.properties \
+	JMX_PORT=9999
 	
 # Install and configure kafka
 RUN curl -sS -k ${SERVICE_URL}/${SERVICE_VERSION}/${SERVICE_RELEASE}.tgz | gunzip -c - | tar -xf - -C /opt \
@@ -33,4 +32,4 @@ RUN chmod +x ${SERVICE_HOME}/bin/*.sh \
 USER $SERVICE_USER
 WORKDIR $SERVICE_HOME
 
-EXPOSE 9092
+EXPOSE 9092 9999
