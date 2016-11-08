@@ -42,6 +42,13 @@ function serviceStart {
     log "[ Starting ${SERVICE_NAME}... ]"
     serviceCheck
     serviceLog
+	unset KAFKA_JMX_OPTS
+	if [ -f ${SERVICE_HOME}/data/serverhostname ] && ! $ENABLE_JMX
+	then 
+		echo "SETTING HOSTNAME for JMX"; 
+		KAFKA_JMX_OPTS=$(grep JMXO ${SERVICE_HOME}/data/serverhostname | cut -c6-)
+		echo KAFKA_JMX_OPTS > ${SERVICE_HOME}/data/KJMXOPTSSET
+	fi
     ${SERVICE_HOME}/bin/kafka-server-start.sh -daemon ${SERVICE_CONF}
 }
 
