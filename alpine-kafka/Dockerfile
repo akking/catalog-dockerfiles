@@ -14,8 +14,7 @@ ENV SERVICE_HOME=/opt/kafka \
     SERVICE_URL=http://apache.mirrors.spacedump.net/kafka 
 ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
     SERVICE_CONF=${SERVICE_HOME}/config/server.properties 
-
-ENV JMXP=${JMXPORT%:*}
+#ENV JMXP=${JMXPORT%:*}
 #ENV JMX_PORT=$JMXP
 	
 # Install and configure kafka
