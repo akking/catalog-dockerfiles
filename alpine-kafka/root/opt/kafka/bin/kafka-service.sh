@@ -47,7 +47,7 @@ function serviceStart {
 	then 
 		echo "SETTING HOSTNAME for JMX"; 
 		KAFKA_JMX_OPTS=$(grep JMXO ${SERVICE_HOME}/data/serverhostname | cut -c6-)
-		echo KAFKA_JMX_OPTS > ${SERVICE_HOME}/data/KJMXOPTSSET
+		echo KAFKA_JMX_OPTS > ${SERVICE_HOME}/data/JMXOPTSSET
 	fi
     ${SERVICE_HOME}/bin/kafka-server-start.sh -daemon ${SERVICE_CONF}
 }
