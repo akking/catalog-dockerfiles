@@ -11,6 +11,7 @@ ENV SERVICE_HOME=/opt/kafka \
     SERVICE_GROUP=kafka \
     SERVICE_GID=10003 \
     SERVICE_VOLUME=/opt/tools \
+	JMX_PORT=${JMXPORT%:*} \
     SERVICE_URL=http://apache.mirrors.spacedump.net/kafka 
 ENV SERVICE_RELEASE=kafka_"$SCALA_VERSION"-"$SERVICE_VERSION" \
     SERVICE_CONF=${SERVICE_HOME}/config/server.properties 
@@ -31,4 +32,4 @@ RUN chmod +x ${SERVICE_HOME}/bin/*.sh \
 USER $SERVICE_USER
 WORKDIR $SERVICE_HOME
 
-# EXPOSE 9092 ${JMX_PORT}
+EXPOSE 9092

@@ -24,7 +24,6 @@ if [ $ENABLE_JMX ]; then
     KAFKA_JMX_OPTS=" -Dcom.sun.management.jmxremote=true "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.authenticate=false "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.ssl=false "
-    KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Dcom.sun.management.jmxremote.rmi.port=${JMXPORT%:*} "
     KAFKA_JMX_OPTS="$KAFKA_JMX_OPTS -Djava.rmi.server.hostname=${KAFKA_ADVERTISE_IP} "
 fi
 
