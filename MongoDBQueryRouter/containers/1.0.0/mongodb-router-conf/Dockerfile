@@ -1,4 +1,4 @@
-FROM ubuntu:yakkety
+FROM alpine:3.4
 MAINTAINER Jeff Kolb
 
 ADD ./*.sh /opt/rancher/bin/
