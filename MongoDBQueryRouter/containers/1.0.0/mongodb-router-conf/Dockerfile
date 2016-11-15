@@ -1,7 +1,6 @@
 FROM alpine:3.4
 MAINTAINER Jeff Kolb
 
-RUN mkdir /opt/rancher/bin
 ADD ./*.sh /opt/rancher/bin/
 RUN chmod u+x /opt/rancher/bin/*.sh
 
