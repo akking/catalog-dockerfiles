@@ -46,6 +46,6 @@ ADD ./dockerentry.sh /dockerentry.sh
 VOLUME /data/confd
 VOLUME /opt/rancher/bin
 VOLUME /usr/share/elasticsearch/config
-
+chown -R 105:108 *.sh
 ENTRYPOINT ["/dockerentry.sh"]
 CMD ["--backend", "rancher", "--prefix", "/2015-07-25"]
