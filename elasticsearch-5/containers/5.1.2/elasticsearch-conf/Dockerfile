@@ -42,7 +42,8 @@ ADD ./conf.d /etc/confd/conf.d
 ADD ./templates /etc/confd/templates
 ADD ./run.sh /run.sh
 ADD ./dockerentry.sh /dockerentry.sh
-RUN chown 105:108 *.sh
+RUN chown 105:108 /dockerentry.sh
+RUN chown 105:108 /run.sh
 VOLUME /data/confd
 VOLUME /opt/rancher/bin
 VOLUME /usr/share/elasticsearch/config
