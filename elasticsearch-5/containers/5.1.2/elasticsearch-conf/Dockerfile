@@ -49,6 +49,6 @@ RUN chmod 0777 /run.sh
 VOLUME /data/confd
 VOLUME /opt/rancher/bin
 VOLUME /usr/share/elasticsearch/config
-CMD ["/bin/bash"]
+CMD ["/bin/sh"]
 #ENTRYPOINT ["/dockerentry.sh"]
 #CMD ["--backend", "rancher", "--prefix", "/2015-07-25"]
