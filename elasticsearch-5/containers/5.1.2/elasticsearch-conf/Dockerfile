@@ -44,6 +44,8 @@ ADD ./run.sh /run.sh
 ADD ./dockerentry.sh /dockerentry.sh
 RUN chown 105:108 /dockerentry.sh
 RUN chown 105:108 /run.sh
+RUN chmod 0777 /dockerentry.sh
+RUN chmod 0777 /run.sh
 VOLUME /data/confd
 VOLUME /opt/rancher/bin
 VOLUME /usr/share/elasticsearch/config
