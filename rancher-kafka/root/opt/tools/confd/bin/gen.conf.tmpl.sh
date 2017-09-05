@@ -61,6 +61,7 @@ socket.receive.buffer.bytes=102400
 socket.request.max.bytes=104857600
 ############################# Log Basics #############################
 log.dirs=${KAFKA_LOG_DIRS}
+default.replication.factor={{getv "self/service/scale"}}
 num.partitions=${KAFKA_NUM_PARTITIONS}
 num.recovery.threads.per.data.dir=1
 delete.topic.enable=${KAFKA_DELETE_TOPICS}
