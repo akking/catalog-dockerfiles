@@ -5,7 +5,7 @@ MAINTAINER Jeff Kolb <jeff.kolb@intlfcstone.com>
 ENV SERVICE_HOME=/opt/kafka \
     SERVICE_NAME=kafka \
     SCALA_VERSION=2.11 \
-    SERVICE_VERSION=0.10.1.0 \
+    SERVICE_VERSION=0.11.0.0 \
     SERVICE_USER=kafka \
     SERVICE_UID=10003 \
     SERVICE_GROUP=kafka \
