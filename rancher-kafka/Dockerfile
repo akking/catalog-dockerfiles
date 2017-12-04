@@ -1,4 +1,4 @@
-FROM rawmind/rancher-tools:0.3.4-5
+FROM rawmind/rancher-tools:3.5-3
 MAINTAINER Jeff Kolb <jeff.kolb@intlfcstone.com>
 
 #Set environment
@@ -14,6 +14,5 @@ ENV SERVICE_NAME=kafka \
 ADD root /
 RUN cd ${SERVICE_VOLUME} && \
     chmod 755 ${SERVICE_VOLUME}/confd/bin/*.sh && \
-    tar czvf ${SERVICE_ARCHIVE} * && \ 
-    rm -rf ${SERVICE_VOLUME}/* 
-
+    tar czvf ${SERVICE_ARCHIVE} * && \
+    rm -rf ${SERVICE_VOLUME}/*
